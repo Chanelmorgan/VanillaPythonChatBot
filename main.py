@@ -27,7 +27,22 @@ def check_all_messages(message):
 
     def response(bot_response, list_of_words, single_response=False, required_words=[]):
         nonlocal highest_prob_list
-        highest_prob_list[bot_response] = message_
+        highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words)
+
+    # Response --------------------------------------------------------------
+    response('Hello!', ['hello', 'hi', 'sup', 'hey', 'heyo'], single_response=True)
+    response("I\'m doing fine, and you?", ['how', 'are', 'you', 'doing'], required_words=['how'])
+    response("Thank you!", ['i', 'love', 'python'], required_words=['python'])
+
+    best_match = max(highest_prob_list, key=highest_prob_list.get)
+    #print(highest_prob_list)
+
+    return long.unknown() if highest_prob_list[best_match] < 1 else best_match
+
+
+
+    # Can add more responses
+
 
 
 def gert_response(user_input):
